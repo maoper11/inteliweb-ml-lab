@@ -3,7 +3,7 @@ module.exports = {
   title: "Inteliweb ML Lab",
   description:
     "Isolated Python, PyTorch and JupyterLab environment for machine learning courses.",
-  icon: "icon.jpeg",
+  icon: "icon.jpg",
 
   menu: async (kernel, info) => {
     const installed = info.exists("app/env") && info.exists("app/.installed");
