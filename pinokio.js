@@ -1,5 +1,5 @@
 module.exports = {
-  version: "0.1.1",
+  version: "0.1.2",
   title: "Inteliweb ML Lab",
   description: "Isolated Python, PyTorch and JupyterLab environment for machine learning courses.",
 
@@ -103,13 +103,13 @@ module.exports = {
         icon: "fa-solid fa-arrows-rotate",
         text: running.rebuild ? "Rebuilding" : "Rebuild Environment",
         href: "rebuild.js",
-        confirm: "Recreate app/env? Your workspace files will be preserved.",
+        confirm: "Recreate app/env? Files in app/workspace will be preserved.",
       },
       {
         icon: "fa-regular fa-circle-xmark",
         text: running.reset ? "Resetting" : "Factory Reset",
         href: "reset.js",
-        confirm: "Delete app and workspace? This removes notebooks, datasets, models and outputs.",
+        confirm: "Delete the complete app, including notebooks, datasets, models and outputs?",
       },
     );
 
