@@ -1,11 +1,22 @@
 module.exports = async (kernel, info) => {
   const run = [
-    // 1) Create the application and persistent workspace folders.
+    // 1) Create the application folder.
     {
       method: "shell.run",
       params: {
+        message: "{{ platform === 'win32' ? 'if not exist app mkdir app' : 'mkdir -p app' }}",
+      },
+    },
+
+    // 2) Create the workspace inside app.
+    // Keeping every generated file under app ensures Pinokio removes the
+    // complete installation when the app is deleted.
+    {
+      method: "shell.run",
+      params: {
+        path: "app",
         message: [
-          "{{ platform === 'win32' ? 'if not exist app mkdir app' : 'mkdir -p app' }}",
+          "{{ platform === 'win32' ? 'if not exist workspace mkdir workspace' : 'mkdir -p workspace' }}",
           "{{ platform === 'win32' ? 'if not exist workspace\\notebooks mkdir workspace\\notebooks' : 'mkdir -p workspace/notebooks' }}",
           "{{ platform === 'win32' ? 'if not exist workspace\\scripts mkdir workspace\\scripts' : 'mkdir -p workspace/scripts' }}",
           "{{ platform === 'win32' ? 'if not exist workspace\\datasets mkdir workspace\\datasets' : 'mkdir -p workspace/datasets' }}",
@@ -15,7 +26,7 @@ module.exports = async (kernel, info) => {
       },
     },
 
-    // 2) Install a uv-managed Python and create app/env.
+    // 3) Install a uv-managed Python and create app/env.
     {
       method: "shell.run",
       params: {
@@ -29,9 +40,7 @@ module.exports = async (kernel, info) => {
       },
     },
 
-    // 3) Bootstrap pip and install Jupyter services.
-    // uv venv does not guarantee that pip is initially available, so use
-    // uv pip first, matching the proven Inteliweb ComfyUI installer pattern.
+    // 4) Bootstrap pip and install Jupyter services.
     {
       method: "shell.run",
       params: {
@@ -47,7 +56,7 @@ module.exports = async (kernel, info) => {
       },
     },
 
-    // 4) Install the selected validated PyTorch build.
+    // 5) Install the selected validated PyTorch build.
     {
       method: "script.start",
       params: {
@@ -56,7 +65,7 @@ module.exports = async (kernel, info) => {
       },
     },
 
-    // 5) Install the selected course package profile.
+    // 6) Install the selected course package profile.
     {
       method: "script.start",
       params: {
@@ -65,7 +74,7 @@ module.exports = async (kernel, info) => {
       },
     },
 
-    // 6) Register a clearly named Jupyter kernel inside app/env.
+    // 7) Register a clearly named Jupyter kernel inside app/env.
     {
       when: "{{String(env.REGISTER_JUPYTER_KERNEL || 'true').toLowerCase() !== 'false'}}",
       method: "shell.run",
@@ -76,7 +85,7 @@ module.exports = async (kernel, info) => {
       },
     },
 
-    // 7) Final checks. Any failure prevents the completion marker.
+    // 8) Final checks. Any failure prevents the completion marker.
     {
       method: "shell.run",
       params: {
@@ -89,7 +98,7 @@ module.exports = async (kernel, info) => {
       },
     },
 
-    // 8) Mark the installation as complete only after every required import works.
+    // 9) Mark the installation as complete only after every required import works.
     {
       method: "shell.run",
       params: {
