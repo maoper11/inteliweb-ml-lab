@@ -1,4 +1,6 @@
-app/
+app/env/
+app/workspace/
+app/.installed
 workspace/
 *.log
 __pycache__/
