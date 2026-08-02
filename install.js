@@ -82,14 +82,6 @@ module.exports = async (kernel, info) => {
       params: {
         path: "app",
         venv: "env",
-        message: "python ../tools/install_lesson_bundle.py curriculum/python-to-diffusion/notebooks",
-      },
-    },
-    {
-      method: "shell.run",
-      params: {
-        path: "app",
-        venv: "env",
         message: "python ../tools/install_courses.py curriculum workspace/courses",
       },
     },
