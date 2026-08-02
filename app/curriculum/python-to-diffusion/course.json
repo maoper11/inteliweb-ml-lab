@@ -7,16 +7,30 @@
   "status": "active",
   "level": "beginner-to-intermediate",
   "recommended_profile": "full",
-  "entry_notebook": "00-ruta-de-aprendizaje.ipynb",
-  "modules": [
-    "00-primeros-pasos",
-    "01-python",
-    "02-datos-y-matematicas",
-    "03-machine-learning",
-    "04-pytorch",
-    "05-computer-vision",
-    "06-latentes-y-difusion",
-    "07-optimizacion-gpu",
-    "08-comfyui"
+  "entry_notebook": "notebooks/00_Bienvenida.ipynb",
+  "notebooks": [
+    "notebooks/00_Bienvenida.ipynb",
+    "notebooks/01_Verificar_Entorno.ipynb",
+    "notebooks/02_Python_Variables.ipynb",
+    "notebooks/03_Python_Listas_Diccionarios.ipynb",
+    "notebooks/04_Python_Funciones.ipynb",
+    "notebooks/05_NumPy.ipynb",
+    "notebooks/06_Imagenes_como_Numeros.ipynb",
+    "notebooks/07_AI_ML_Deep_Learning.ipynb",
+    "notebooks/08_Clasificacion.ipynb",
+    "notebooks/09_Perceptron.ipynb",
+    "notebooks/10_Tensores_PyTorch.ipynb",
+    "notebooks/11_Primer_Modelo_PyTorch.ipynb",
+    "notebooks/12_GPU_CUDA_VRAM.ipynb",
+    "notebooks/13_Pillow_OpenCV.ipynb",
+    "notebooks/14_Introduccion_a_Difusion.ipynb"
+  ],
+  "future_modules": [
+    "latentes-y-vae",
+    "text-encoders",
+    "diffusers-text-to-image",
+    "image-to-image",
+    "lora",
+    "codigo-vs-comfyui"
   ]
 }
