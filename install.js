@@ -82,7 +82,7 @@ module.exports = async (kernel, info) => {
       params: {
         path: "app",
         venv: "env",
-        message: "python ../tools/install_courses.py ../curriculum workspace/courses",
+        message: "python ../tools/install_courses.py curriculum workspace/courses",
       },
     },
     {
