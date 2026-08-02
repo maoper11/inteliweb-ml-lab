@@ -26,6 +26,17 @@ module.exports = async () => ({
       },
     },
     {
+      method: "shell.run",
+      params: {
+        path: "app",
+        venv: "env",
+        message: [
+          "python ../tools/install_lesson_bundle.py curriculum/python-to-diffusion/notebooks",
+          "python ../tools/install_courses.py curriculum workspace/courses",
+        ],
+      },
+    },
+    {
       method: "script.start",
       params: {
         uri: "verify.js",
