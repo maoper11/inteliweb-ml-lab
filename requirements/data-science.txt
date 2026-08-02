@@ -1,0 +1,7 @@
+-r standard.txt
+polars
+sympy
+xgboost
+lightgbm
+catboost
+joblib
