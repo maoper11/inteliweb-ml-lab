@@ -1,0 +1,16 @@
+-r standard.txt
+transformers
+datasets
+accelerate
+tokenizers
+sentencepiece
+safetensors
+huggingface-hub
+evaluate
+diffusers
+peft
+pillow
+opencv-python
+albumentations
+timm
+scikit-image
