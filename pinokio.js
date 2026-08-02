@@ -2,7 +2,6 @@ module.exports = {
   version: "0.1.0",
   title: "Inteliweb ML Lab",
   description: "Isolated Python, PyTorch and JupyterLab environment for machine learning courses.",
-  icon: "icon.png",
 
   menu: async (kernel, info) => {
     const installed = info.exists("app/env");
