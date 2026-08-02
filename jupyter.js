@@ -7,11 +7,8 @@ module.exports = {
       id: "start_jupyterlab",
       method: "shell.run",
       params: {
-        // Start directly inside the persistent workspace. This avoids passing
-        // a relative ServerApp.root_dir value that Jupyter may normalize with
-        // literal quotes on Windows.
-        path: "workspace",
-        venv: "../app/env",
+        path: "app/workspace",
+        venv: "../env",
         env: {
           PYTHONUNBUFFERED: "1",
           TOKENIZERS_PARALLELISM: "false",
@@ -36,7 +33,6 @@ module.exports = {
       },
     },
     {
-      // Do not create a fake localhost link when the server failed to start.
       when: "{{input.event && input.event[1] && /^https?:\\/\\//.test(input.event[1])}}",
       method: "local.set",
       params: {
