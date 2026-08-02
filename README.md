@@ -7,7 +7,8 @@ Isolated Python, PyTorch and JupyterLab environment installer for Pinokio by Int
 - Managed Python installation with `uv` — no system-wide Python required.
 - Isolated virtual environment in `app/env`.
 - Validated PyTorch profiles for NVIDIA CUDA, CPU, DirectML, ROCm and Apple Silicon.
-- JupyterLab with its workspace stored inside `app/workspace`.
+- JupyterLab with its editable workspace stored inside `app/workspace`.
+- Extensible course catalog stored in `app/curriculum`.
 - Full machine-learning and generative-AI package profile.
 - Environment verification and rebuild tools.
 - Pinokio DEV mode automatically detects `app/env` and exposes a Python Shell with the environment activated.
@@ -22,22 +23,28 @@ JUPYTER_PORT=8888
 GPU_DEVICE=auto
 ```
 
-## Workspace
-
-All user files are stored inside the Pinokio app folder:
+## App structure
 
 ```text
 app/
-  env/
-  workspace/
-    notebooks/
-    scripts/
+  curriculum/        # Master course content distributed with the launcher
+    catalog.json
+    python-to-diffusion/
+    python-to-ai-agents/
+    predictive-machine-learning/
+  env/               # Isolated Python environment
+  workspace/         # Editable student files opened in JupyterLab
+    courses/
+    shared/
+    projects/
     datasets/
     models/
     outputs/
 ```
 
-Rebuilding the Python environment removes only `app/env` and preserves `app/workspace`. Deleting the complete Pinokio app removes both the environment and workspace.
+During installation, missing files are copied from `app/curriculum` into `app/workspace/courses`. Existing student files are preserved during an environment rebuild.
+
+Deleting the complete Pinokio app removes the curriculum, environment and workspace together.
 
 ## CUDA clarification
 
