@@ -1,0 +1,8 @@
+-r data-science.txt
+-r generative-ai.txt
+requests
+psutil
+pyyaml
+python-dotenv
+jupyterlab-lsp
+python-lsp-server
