@@ -1,0 +1,35 @@
+##########################################################################
+# Inteliweb ML Lab — Pinokio Environment
+##########################################################################
+
+# Managed Python version installed by uv.
+# Recommended: 3.12. Use 3.11 for maximum compatibility with older packages.
+PYTHON_VER=3.12
+
+# PyTorch compute profile.
+# auto           -> NVIDIA: 2.10.0-cu130; Windows AMD: DirectML;
+#                   Apple Silicon: MPS; unsupported GPUs: CPU
+# 2.10.0-cu130  -> torch 2.10.0 + CUDA 13.0 runtime
+# 2.9.1-cu128   -> torch 2.9.1 + CUDA 12.8 runtime
+# 2.8.0-cu128   -> torch 2.8.0 + CUDA 12.8 runtime
+# latest-cu130  -> newest packages from the cu130 PyTorch index
+# directml      -> Windows AMD / supported DirectML devices
+# 2.7.0-rocm6.3 -> Linux AMD with a compatible ROCm installation
+# cpu           -> CPU-only packages
+TORCH_PROFILE=auto
+
+# Package profile.
+# minimal | standard | data-science | generative-ai | full
+COURSE_PROFILE=full
+
+# JupyterLab service.
+JUPYTER_PORT=8888
+
+# GPU selection. auto, 0, 1, ...
+GPU_DEVICE=auto
+
+# Register a clearly named Jupyter kernel inside app/env.
+REGISTER_JUPYTER_KERNEL=true
+
+# Optional TensorBoard service.
+TENSORBOARD_PORT=6006
