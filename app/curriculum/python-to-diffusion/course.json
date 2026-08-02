@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "slug": "python-to-diffusion",
+  "title": "From Python to Diffusion Models",
+  "subtitle": "De cero a comprender y ejecutar pipelines de IA generativa",
+  "language": "es",
+  "status": "active",
+  "level": "beginner-to-intermediate",
+  "recommended_profile": "full",
+  "entry_notebook": "00-ruta-de-aprendizaje.ipynb",
+  "modules": [
+    "00-primeros-pasos",
+    "01-python",
+    "02-datos-y-matematicas",
+    "03-machine-learning",
+    "04-pytorch",
+    "05-computer-vision",
+    "06-latentes-y-difusion",
+    "07-optimizacion-gpu",
+    "08-comfyui"
+  ]
+}
