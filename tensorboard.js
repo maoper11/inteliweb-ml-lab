@@ -7,10 +7,10 @@ module.exports = {
       id: "start_tensorboard",
       method: "shell.run",
       params: {
-        path: "app",
-        venv: "env",
+        path: "app/workspace",
+        venv: "../env",
         message: [
-          "python -m tensorboard.main --logdir ../workspace/outputs --host 127.0.0.1 --port {{env.TENSORBOARD_PORT || '6006'}}",
+          "python -m tensorboard.main --logdir outputs --host 127.0.0.1 --port {{env.TENSORBOARD_PORT || '6006'}}",
         ],
         on: [
           {
@@ -24,9 +24,10 @@ module.exports = {
       },
     },
     {
+      when: "{{input.event && input.event[1] && /^https?:\\/\\//.test(input.event[1])}}",
       method: "local.set",
       params: {
-        url: "{{(input.event && input.event[1] && /^https?:\\/\\//.test(input.event[1])) ? input.event[1].replace('127.0.0.1', 'localhost') : 'http://localhost:' + (env.TENSORBOARD_PORT || '6006')}}",
+        url: "{{input.event[1].replace('127.0.0.1', 'localhost')}}",
       },
     },
   ],
