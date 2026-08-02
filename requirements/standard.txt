@@ -1,0 +1,7 @@
+-r minimal.txt
+scipy
+seaborn
+plotly
+openpyxl
+statsmodels
+torchmetrics
