@@ -1,6 +1,6 @@
 module.exports = async (kernel, info) => {
   const run = [
-    // 1) Create the application folder.
+    // 1) Create app.
     {
       method: "shell.run",
       params: {
@@ -8,25 +8,32 @@ module.exports = async (kernel, info) => {
       },
     },
 
-    // 2) Create the workspace inside app.
-    // Keeping every generated file under app ensures Pinokio removes the
-    // complete installation when the app is deleted.
+    // 2) Create app/workspace without nested paths in the command.
     {
       method: "shell.run",
       params: {
         path: "app",
+        message: "{{ platform === 'win32' ? 'if not exist workspace mkdir workspace' : 'mkdir -p workspace' }}",
+      },
+    },
+
+    // 3) Create each workspace subfolder from inside app/workspace.
+    // This avoids backslash escaping in Pinokio on Windows.
+    {
+      method: "shell.run",
+      params: {
+        path: "app/workspace",
         message: [
-          "{{ platform === 'win32' ? 'if not exist workspace mkdir workspace' : 'mkdir -p workspace' }}",
-          "{{ platform === 'win32' ? 'if not exist workspace\\notebooks mkdir workspace\\notebooks' : 'mkdir -p workspace/notebooks' }}",
-          "{{ platform === 'win32' ? 'if not exist workspace\\scripts mkdir workspace\\scripts' : 'mkdir -p workspace/scripts' }}",
-          "{{ platform === 'win32' ? 'if not exist workspace\\datasets mkdir workspace\\datasets' : 'mkdir -p workspace/datasets' }}",
-          "{{ platform === 'win32' ? 'if not exist workspace\\models mkdir workspace\\models' : 'mkdir -p workspace/models' }}",
-          "{{ platform === 'win32' ? 'if not exist workspace\\outputs mkdir workspace\\outputs' : 'mkdir -p workspace/outputs' }}",
+          "{{ platform === 'win32' ? 'if not exist notebooks mkdir notebooks' : 'mkdir -p notebooks' }}",
+          "{{ platform === 'win32' ? 'if not exist scripts mkdir scripts' : 'mkdir -p scripts' }}",
+          "{{ platform === 'win32' ? 'if not exist datasets mkdir datasets' : 'mkdir -p datasets' }}",
+          "{{ platform === 'win32' ? 'if not exist models mkdir models' : 'mkdir -p models' }}",
+          "{{ platform === 'win32' ? 'if not exist outputs mkdir outputs' : 'mkdir -p outputs' }}",
         ],
       },
     },
 
-    // 3) Install a uv-managed Python and create app/env.
+    // 4) Install a uv-managed Python and create app/env.
     {
       method: "shell.run",
       params: {
@@ -40,7 +47,7 @@ module.exports = async (kernel, info) => {
       },
     },
 
-    // 4) Bootstrap pip and install Jupyter services.
+    // 5) Bootstrap pip and install Jupyter services.
     {
       method: "shell.run",
       params: {
@@ -56,7 +63,7 @@ module.exports = async (kernel, info) => {
       },
     },
 
-    // 5) Install the selected validated PyTorch build.
+    // 6) Install the selected validated PyTorch build.
     {
       method: "script.start",
       params: {
@@ -65,7 +72,7 @@ module.exports = async (kernel, info) => {
       },
     },
 
-    // 6) Install the selected course package profile.
+    // 7) Install the selected course package profile.
     {
       method: "script.start",
       params: {
@@ -74,7 +81,7 @@ module.exports = async (kernel, info) => {
       },
     },
 
-    // 7) Register a clearly named Jupyter kernel inside app/env.
+    // 8) Register a clearly named Jupyter kernel inside app/env.
     {
       when: "{{String(env.REGISTER_JUPYTER_KERNEL || 'true').toLowerCase() !== 'false'}}",
       method: "shell.run",
@@ -85,7 +92,7 @@ module.exports = async (kernel, info) => {
       },
     },
 
-    // 8) Final checks. Any failure prevents the completion marker.
+    // 9) Final checks. Any failure prevents the completion marker.
     {
       method: "shell.run",
       params: {
@@ -98,7 +105,7 @@ module.exports = async (kernel, info) => {
       },
     },
 
-    // 9) Mark the installation as complete only after every required import works.
+    // 10) Mark the installation as complete only after every required import works.
     {
       method: "shell.run",
       params: {
