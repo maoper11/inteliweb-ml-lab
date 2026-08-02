@@ -1,12 +1,12 @@
 module.exports = {
   version: "0.1.2",
   title: "Inteliweb ML Lab",
-  description: "Isolated Python, PyTorch and JupyterLab environment for machine learning courses.",
+  description:
+    "Isolated Python, PyTorch and JupyterLab environment for machine learning courses.",
+  icon: "icon.jpeg",
 
   menu: async (kernel, info) => {
-    const installed =
-      info.exists("app/env") &&
-      info.exists("app/.installed");
+    const installed = info.exists("app/env") && info.exists("app/.installed");
 
     const running = {
       install: info.running("install.js"),
@@ -109,7 +109,8 @@ module.exports = {
         icon: "fa-regular fa-circle-xmark",
         text: running.reset ? "Resetting" : "Factory Reset",
         href: "reset.js",
-        confirm: "Delete the complete app, including notebooks, datasets, models and outputs?",
+        confirm:
+          "Delete the complete app, including notebooks, datasets, models and outputs?",
       },
     );
 
