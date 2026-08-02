@@ -25,7 +25,11 @@ module.exports = async () => ({
       params: {
         message: [
           "{{ platform === 'win32' ? 'if exist workspace\\* xcopy workspace\\* app\\workspace\\ /E /I /Y' : 'if [ -d workspace ]; then cp -a workspace/. app/workspace/; fi' }}",
+          "{{ platform === 'win32' ? 'if exist workspacenotebooks\\* xcopy workspacenotebooks\\* app\\workspace\\notebooks\\ /E /I /Y' : 'if [ -d workspacenotebooks ]; then cp -a workspacenotebooks/. app/workspace/notebooks/; fi' }}",
+          "{{ platform === 'win32' ? 'if exist app\\workspacenotebooks\\* xcopy app\\workspacenotebooks\\* app\\workspace\\notebooks\\ /E /I /Y' : 'if [ -d app/workspacenotebooks ]; then cp -a app/workspacenotebooks/. app/workspace/notebooks/; fi' }}",
           "{{ platform === 'win32' ? 'if exist workspace rmdir /s /q workspace' : 'rm -rf workspace' }}",
+          "{{ platform === 'win32' ? 'if exist workspacenotebooks rmdir /s /q workspacenotebooks' : 'rm -rf workspacenotebooks' }}",
+          "{{ platform === 'win32' ? 'if exist app\\workspacenotebooks rmdir /s /q app\\workspacenotebooks' : 'rm -rf app/workspacenotebooks' }}",
         ],
       },
     },
